@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Aniversário</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f7f7;
+      color: #333;
+    }
+    header {
+      background: #ff6f61;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .card h3 {
+      font-size: 1rem;
+      margin: 10px 0;
+      height: 40px;
+      overflow: hidden;
+    }
+    .card a {
+      text-decoration: none;
+      color: #0073e6;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    .btn {
+      background: #28a745;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+    .btn:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+    .status {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .disponivel {
+      color: green;
+    }
+    .vendido {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎂 Lista de Aniversário</h1>
+    <p>Escolha um presente para a criança! Ao contribuir, o item será marcado como vendido.</p>
+  </header>
+
+  <div class="grid">
+
+    <!-- Item exemplo -->
+    <div class="card">
+      <img src="https://via.placeholder.com/150" alt="Presente">
+      <h3>LEGO Classic 790 peças</h3>
+      <a href="https://www.amazon.com/dp/XXXXX" target="_blank">Ver na Amazon</a>
+      <a class="btn" href="https://paypal.me/seunome/50" target="_blank">Contribuir</a>
+      <p class="status disponivel">Disponível</p>
+    </div>
+
+    <!-- Replicar para os 20 itens -->
+    <div class="card">
+      <img src="https://via.placeholder.com/150" alt="Presente">
+      <h3>Bicicleta infantil</h3>
+      <a href="https://www.amazon.com/dp/YYYYY" target="_blank">Ver na Amazon</a>
+      <a class="btn" href="https://paypal.me/seunome/100" target="_blank">Contribuir</a>
+      <p class="status disponivel">Disponível</p>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/150" alt="Presente">
+      <h3>Livro ilustrado de histórias</h3>
+      <a href="https://www.amazon.com/dp/ZZZZZ" target="_blank">Ver na Amazon</a>
+      <a class="btn" href="https://paypal.me/seunome/20" target="_blank">Contribuir</a>
+      <p class="status disponivel">Disponível</p>
+    </div>
+
+    <!-- ... continue até 20 itens fictícios -->
+    <!-- Sugestões: Quebra-cabeça, Carrinho Hot Wheels, Boneca Barbie, Jogo de Tabuleiro, Tablet Infantil, Mochila Escolar, Fones de ouvido, Kit Arte, Bola de Futebol, Drone Mini, Patins, Play-Doh Pack, Microscopio Infantil, Kit Ciência, Instrumento Musical, Pelúcia, Luminária Infantil, Roupas temáticas, Kit esportivo, Jogo educativo. -->
+
+  </div>
+
+</body>
+</html>
