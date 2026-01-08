@@ -142,9 +142,90 @@
       padding:24px 20px; text-align:center; color:var(--muted);
       background:#fff;
     }
+
+    /* Sold state */
+    .mini.sold{
+      background:#ccc;
+      color:#666;
+      border:2px solid #bbb;
+      cursor:not-allowed;
+      opacity:0.6;
+    }
+    .card.is-sold{
+      opacity:0.7;
+    }
+    .card.is-sold .thumb::after{
+      content:'SOLD OUT';
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%) rotate(-15deg);
+      background:rgba(237, 146, 126, 0.95);
+      color:#fff;
+      padding:12px 24px;
+      font-weight:800;
+      font-size:20px;
+      letter-spacing:2px;
+      border-radius:8px;
+      box-shadow:0 4px 12px rgba(0,0,0,.2);
+    }
   </style>
 </head>
 <body>
+
+  <script>
+    // ========================================
+    // CONTROLE DE ITENS VENDIDOS
+    // Para marcar um item como vendido, mude "sold: false" para "sold: true"
+    // ========================================
+    const productStatus = {
+      'item-1': { sold: false },  // Maquina Fotografica Verde
+      'item-2': { sold: false },  // Carrinho Fisherprice
+      'item-3': { sold: false },  // Picole
+      'item-4': { sold: false },  // Cozinha de Crianca
+      'item-5': { sold: false },  // Maquina Fotografica Verde
+      'item-6': { sold: false },  // Carrinho Fisherprice
+      'item-7': { sold: false },  // Picole
+      'item-8': { sold: false },  // Cozinha de Crianca
+      'item-9': { sold: false },  // Maquina Fotografica Verde
+      'item-10': { sold: false }, // Carrinho Fisherprice
+      'item-11': { sold: false }, // Picole
+      'item-12': { sold: false }, // Cozinha de Crianca
+      'item-13': { sold: false }, // Maquina Fotografica Verde
+      'item-14': { sold: false }, // Carrinho Fisherprice
+      'item-15': { sold: false }, // Picole
+      'item-16': { sold: false }, // Cozinha de Crianca
+      'item-17': { sold: false }, // Maquina Fotografica Verde
+      'item-18': { sold: false }, // Carrinho Fisherprice
+      'item-19': { sold: false }, // Picole
+      'item-20': { sold: false }, // Cozinha de Crianca
+      'item-21': { sold: false }, // Joyreal Wooden Noah's Ark
+      'item-22': { sold: false }, // Montessori Wooden Educational
+      'item-23': { sold: false }, // 13 Pieces Montessori Kitchen
+      'item-24': { sold: false }, // Wooden Montessori Baby Toddler
+    };
+
+    // Aplicar status quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+      Object.keys(productStatus).forEach(function(itemId) {
+        const card = document.getElementById(itemId);
+        if (!card) return;
+
+        const buyBtn = card.querySelector('.buy-now');
+        if (!buyBtn) return;
+
+        if (productStatus[itemId].sold) {
+          // Marcar como vendido
+          card.classList.add('is-sold');
+          buyBtn.textContent = 'Sold';
+          buyBtn.classList.remove('ghost');
+          buyBtn.classList.add('sold');
+          buyBtn.style.pointerEvents = 'none';
+          buyBtn.removeAttribute('href');
+        }
+      });
+    });
+  </script>
 
   <!-- Header -->
   <header class="site-header">
@@ -183,7 +264,7 @@
 
     <div class="grid">
       <!-- Each card uses the demo product link + image from the Blissful demo -->
-      <article class="card">
+      <article class="card" id="item-1">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71ZZlAO08TL._AC_SX679_.jpg" alt="Maquina Fotografica Verde">
         </div>
@@ -192,12 +273,12 @@
           <div class="price">$39.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/bouquet-of-yellow-flower/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-2">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/817wlb4dSDL._AC_SX679_.jpg" alt="Chocolate Lollipop">
         </div>
@@ -206,12 +287,12 @@
           <div class="price">$12.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/chocolate-lollipop/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-3">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71ib70D0c+L._AC_SX679_.jpg" alt="Customized Printed Mug">
         </div>
@@ -220,12 +301,12 @@
           <div class="price">$18.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-printed-mug/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-4">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/81S4nGOOFnL._AC_SX679_.jpg" alt="Customized Rings">
         </div>
@@ -234,12 +315,12 @@
           <div class="price">$55.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-rings/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-5">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71ZZlAO08TL._AC_SX679_.jpg" alt="Maquina Fotografica Verde">
         </div>
@@ -248,12 +329,12 @@
           <div class="price">$39.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/bouquet-of-yellow-flower/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-6">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/817wlb4dSDL._AC_SX679_.jpg" alt="Chocolate Lollipop">
         </div>
@@ -262,12 +343,12 @@
           <div class="price">$12.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/chocolate-lollipop/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-7">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71ib70D0c+L._AC_SX679_.jpg" alt="Customized Printed Mug">
         </div>
@@ -276,12 +357,12 @@
           <div class="price">$18.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-printed-mug/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-8">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/81S4nGOOFnL._AC_SX679_.jpg" alt="Customized Rings">
         </div>
@@ -290,12 +371,12 @@
           <div class="price">$55.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-rings/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-9">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71ZZlAO08TL._AC_SX679_.jpg" alt="Maquina Fotografica Verde">
         </div>
@@ -304,12 +385,12 @@
           <div class="price">$39.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/bouquet-of-yellow-flower/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-10">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/817wlb4dSDL._AC_SX679_.jpg" alt="Chocolate Lollipop">
         </div>
@@ -318,12 +399,12 @@
           <div class="price">$12.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/chocolate-lollipop/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-11">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71ib70D0c+L._AC_SX679_.jpg" alt="Customized Printed Mug">
         </div>
@@ -332,12 +413,12 @@
           <div class="price">$18.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-printed-mug/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-12">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/81S4nGOOFnL._AC_SX679_.jpg" alt="Customized Rings">
         </div>
@@ -346,12 +427,12 @@
           <div class="price">$55.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-rings/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-13">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71ZZlAO08TL._AC_SX679_.jpg" alt="Maquina Fotografica Verde">
         </div>
@@ -360,12 +441,12 @@
           <div class="price">$39.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/bouquet-of-yellow-flower/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-14">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/817wlb4dSDL._AC_SX679_.jpg" alt="Chocolate Lollipop">
         </div>
@@ -374,12 +455,12 @@
           <div class="price">$12.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/chocolate-lollipop/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-15">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71ib70D0c+L._AC_SX679_.jpg" alt="Customized Printed Mug">
         </div>
@@ -388,12 +469,12 @@
           <div class="price">$18.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-printed-mug/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-16">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/81S4nGOOFnL._AC_SX679_.jpg" alt="Customized Rings">
         </div>
@@ -402,11 +483,11 @@
           <div class="price">$55.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-rings/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
-      <article class="card">
+      <article class="card" id="item-17">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71ZZlAO08TL._AC_SX679_.jpg" alt="Maquina Fotografica Verde">
         </div>
@@ -415,12 +496,12 @@
           <div class="price">$39.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/bouquet-of-yellow-flower/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-18">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/817wlb4dSDL._AC_SX679_.jpg" alt="Chocolate Lollipop">
         </div>
@@ -429,12 +510,12 @@
           <div class="price">$12.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/chocolate-lollipop/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-19">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71ib70D0c+L._AC_SX679_.jpg" alt="Customized Printed Mug">
         </div>
@@ -443,12 +524,12 @@
           <div class="price">$18.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-printed-mug/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-20">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/81S4nGOOFnL._AC_SX679_.jpg" alt="Customized Rings">
         </div>
@@ -457,12 +538,12 @@
           <div class="price">$55.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-rings/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-21">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/I/71SvJc1Jy4L._AC_SL1500_.jpg" alt="Maquina Fotografica Verde">
         </div>
@@ -471,12 +552,12 @@
           <div class="price">$33.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/bouquet-of-yellow-flower/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-22">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/G/01/apparel/rcxgs/tile._CB483369110_.gif" alt="Chocolate Lollipop">
         </div>
@@ -485,12 +566,12 @@
           <div class="price">$19.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/chocolate-lollipop/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-23">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/G/01/apparel/rcxgs/tile._CB483369110_.gif" alt="Customized Printed Mug">
         </div>
@@ -499,12 +580,12 @@
           <div class="price">$18.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-printed-mug/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" id="item-24">
         <div class="thumb">
           <img src="https://m.media-amazon.com/images/G/01/apparel/rcxgs/tile._CB483369110_.gif" alt="Customized Rings">
         </div>
@@ -513,7 +594,7 @@
           <div class="price">$21.00</div>
           <div class="actions">
             <a class="mini primary" target="_blank" href="https://themegrilldemos.com/blissful/product/customized-rings/">View Product</a>
-            <a class="mini ghost" href="payment.html">Buy Now</a>
+            <a class="mini ghost buy-now" href="payment.html">Buy Now</a>
           </div>
         </div>
       </article>      
