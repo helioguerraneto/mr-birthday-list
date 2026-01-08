@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment Options — Birthday Gift List</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#fffaf8;
+      --card:#ffffff;
+      --brand:#ed927e;
+      --brand-2:#f6c4b8;
+      --text:#2b2b2b;
+      --muted:#666;
+      --shadow:0 10px 18px rgba(0,0,0,.06);
+      --radius:14px;
+      --radius-sm:10px;
+      --maxw:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:'Jost',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    /* Header */
+    .site-header{
+      position:sticky; top:0; z-index:50;
+      background:linear-gradient(0deg, var(--brand-2), var(--brand));
+      color:#fff;
+      box-shadow:var(--shadow);
+    }
+    .wrap{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .logo{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700; letter-spacing:.5px; font-size:20px;
+    }
+    .logo-badge{
+      width:36px; height:36px; border-radius:50%;
+      background:#fff2ef; display:grid; place-items:center;
+      color:var(--brand);
+      font-weight:800;
+      box-shadow:0 4px 10px rgba(0,0,0,.08);
+    }
+    nav a{
+      color:#fff; text-decoration:none; font-weight:600; font-size:15px; padding:10px 14px; border-radius:999px;
+    }
+    nav a:hover{ background:rgba(255,255,255,.18); }
+
+    /* Hero */
+    .hero{
+      background:
+        radial-gradient(1200px 300px at -10% -40%, #ffe8e1 0%, rgba(255,232,225,0) 60%),
+        radial-gradient(900px 300px at 110% -30%, #ffe9f1 0%, rgba(255,233,241,0) 60%),
+        linear-gradient(180deg,#fffdfc, #fff7f5);
+      padding:64px 20px 40px;
+      border-bottom:1px solid #f1e3df;
+    }
+    .hero-inner{max-width:var(--maxw); margin:0 auto; text-align:center}
+    .eyebrow{
+      display:inline-block; margin-bottom:12px;
+      background:#fff; color:var(--brand);
+      border:1px solid #ffd6cd;
+      padding:6px 12px; border-radius:999px; font-weight:600; font-size:13px;
+      box-shadow:var(--shadow);
+    }
+    .hero h1{
+      margin:10px auto 14px; font-size:clamp(28px, 5vw, 44px);
+      line-height:1.15; font-weight:800; letter-spacing:.3px;
+    }
+    .hero p{
+      margin:0 auto; max-width:760px; color:var(--muted); font-size:18px;
+    }
+
+    /* Payment section */
+    .section{
+      padding:40px 20px 60px;
+      max-width:var(--maxw); margin:0 auto;
+    }
+    .section h2{
+      font-size:clamp(22px, 3.5vw, 30px); margin:0 0 8px; text-align:center; font-weight:800;
+    }
+    .section .sub{
+      text-align:center; color:var(--muted); margin:0 auto 40px; max-width:720px;
+    }
+
+    .payment-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap:30px;
+      max-width:1000px;
+      margin:0 auto;
+    }
+
+    .payment-card{
+      background:var(--card);
+      border:2px solid #f0e5e2;
+      border-radius:var(--radius);
+      padding:30px;
+      box-shadow:var(--shadow);
+      text-align:center;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .payment-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 16px 26px rgba(0,0,0,.08);
+      border-color:var(--brand-2);
+    }
+
+    .payment-icon{
+      width:60px; height:60px;
+      margin:0 auto 20px;
+      background:linear-gradient(135deg, var(--brand-2), var(--brand));
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size:28px;
+      box-shadow:var(--shadow);
+    }
+
+    .payment-title{
+      font-size:24px;
+      font-weight:800;
+      margin:0 0 10px;
+      color:var(--text);
+    }
+
+    .payment-info{
+      font-size:18px;
+      font-weight:600;
+      color:var(--brand);
+      margin:0 0 20px;
+    }
+
+    .qr-container{
+      margin:20px auto;
+      max-width:250px;
+      border:3px solid #f0e5e2;
+      border-radius:var(--radius-sm);
+      padding:10px;
+      background:#fff;
+    }
+
+    .qr-container img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:8px;
+    }
+
+    .payment-note{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:15px;
+      line-height:1.5;
+    }
+
+    .back-btn-container{
+      text-align:center;
+      margin-top:40px;
+    }
+
+    .back-btn{
+      display:inline-block;
+      padding:12px 24px;
+      background:var(--brand);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      transition:all .18s ease;
+    }
+    .back-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 20px rgba(0,0,0,.1);
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid #f1e3df;
+      padding:24px 20px;
+      text-align:center;
+      color:var(--muted);
+      background:#fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="wrap">
+      <div class="logo">
+        <div class="logo-badge">🎂</div>
+        <div>Maria Rita's Birthday Gift List</div>
+      </div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html#shop">Shop</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Payment Options</span>
+      <h1>Choose Your Payment Method</h1>
+      <p>
+        Thank you for your contribution! Select your preferred payment method below.
+      </p>
+    </div>
+  </section>
+
+  <!-- Payment Options -->
+  <section class="section">
+    <h2>Send Your Gift</h2>
+    <p class="sub">Choose from Venmo, PayPal, or Zelle to complete your contribution.</p>
+
+    <div class="payment-grid">
+      
+      <!-- Venmo -->
+      <article class="payment-card">
+        <div class="payment-icon">💚</div>
+        <div class="payment-title">Pay using Venmo</div>
+        <div class="payment-info">@helioguerra</div>
+        <p class="payment-note">
+          Open your Venmo app and send to <strong>@helioguerra</strong>. Don't forget to add a note with the gift name!
+        </p>
+      </article>
+
+      <!-- PayPal -->
+      <article class="payment-card">
+        <div class="payment-icon">💙</div>
+        <div class="payment-title">Pay using PayPal</div>
+        <div class="payment-info">Scan QR Code Below</div>
+        <div class="qr-container">
+          <img src="https://raw.githubusercontent.com/helioguerraneto/mr-birthday-list/main/mycodepaypal.JPG" alt="PayPal QR Code">
+        </div>
+        <p class="payment-note">
+          Scan this QR code with your PayPal app to send payment directly.
+        </p>
+      </article>
+
+      <!-- Zelle -->
+      <article class="payment-card">
+        <div class="payment-icon">💜</div>
+        <div class="payment-title">Pay using Zelle</div>
+        <div class="payment-info">Scan QR Code Below</div>
+        <div class="qr-container">
+          <img src="https://raw.githubusercontent.com/helioguerraneto/mr-birthday-list/main/mycode.jpeg" alt="Zelle QR Code">
+        </div>
+        <p class="payment-note">
+          Scan this QR code with your banking app to send via Zelle.
+        </p>
+      </article>
+
+    </div>
+
+    <div class="back-btn-container">
+      <a class="back-btn" href="index.html">← Back to Gift List</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Birthday Gift List — made with joy ✨
+  </footer>
+</body>
+</html>
