@@ -216,7 +216,7 @@
     <div class="hero-inner">
       <span class="eyebrow">Payment Options</span>
       <h1>Choose Your Payment Method</h1>
-      <p>
+      <p id="item-info">
         Thank you for your contribution! Select your preferred payment method below.
       </p>
     </div>
@@ -226,6 +226,15 @@
   <section class="section">
     <h2>Send Your Gift</h2>
     <p class="sub">Choose from Venmo, PayPal, or Zelle to complete your contribution.</p>
+
+    <!-- Selected Item Display -->
+    <div id="selected-item" style="display:none; max-width:600px; margin:0 auto 40px; padding:20px; background:#fff; border:2px solid var(--brand-2); border-radius:var(--radius); box-shadow:var(--shadow);">
+      <div style="text-align:center;">
+        <div style="font-size:14px; color:var(--muted); margin-bottom:8px; font-weight:600; text-transform:uppercase; letter-spacing:1px;">You selected</div>
+        <div id="item-title" style="font-size:22px; font-weight:800; color:var(--text); margin-bottom:10px;"></div>
+        <div id="item-price" style="font-size:28px; font-weight:800; color:var(--brand);"></div>
+      </div>
+    </div>
 
     <div class="payment-grid">
       
@@ -261,7 +270,9 @@
           <img src="https://raw.githubusercontent.com/helioguerraneto/mr-birthday-list/main/mycode.jpeg" alt="Zelle QR Code">
         </div>
         <p class="payment-note">
-          Scan this QR code with your banking app to send via Zelle.
+          <strong>Important:</strong> Scan this QR code using your <strong>bank app</strong> that supports Zelle (not your phone camera).<br><br>
+          Alternatively, send directly to:<br>
+          <strong style="font-size:16px; color:var(--brand);">949-878-5020</strong>
         </p>
       </article>
 
@@ -271,6 +282,26 @@
       <a class="back-btn" href="index.html">← Back to Gift List</a>
     </div>
   </section>
+
+  <script>
+    // Ler informações do item da URL
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const itemTitle = urlParams.get('item');
+      const itemPrice = urlParams.get('price');
+
+      if (itemTitle && itemPrice) {
+        // Mostrar o card com as informações do item
+        document.getElementById('selected-item').style.display = 'block';
+        document.getElementById('item-title').textContent = itemTitle;
+        document.getElementById('item-price').textContent = itemPrice;
+        
+        // Atualizar a mensagem do hero
+        document.getElementById('item-info').innerHTML = 
+          'You\'re about to purchase <strong>' + itemTitle + '</strong> for <strong>' + itemPrice + '</strong>.<br>Select your preferred payment method below.';
+      }
+    });
+  </script>
 
   <footer>
     © 2025 Birthday Gift List — made with joy ✨
