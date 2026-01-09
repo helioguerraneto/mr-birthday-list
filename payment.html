@@ -236,6 +236,48 @@
       </div>
     </div>
 
+    <!-- Message Form -->
+    <div style="max-width:600px; margin:0 auto 50px;">
+      <div id="message-form-container">
+        <h3 style="text-align:center; font-size:24px; font-weight:800; color:var(--text); margin-bottom:10px;">Leave your message to Maria Rita</h3>
+        <p style="text-align:center; color:var(--muted); margin-bottom:30px;">Share your wishes and make her day even more special! ✨</p>
+        
+        <form id="message-form" style="background:#fff; padding:30px; border-radius:var(--radius); border:2px solid #f0e5e2; box-shadow:var(--shadow);">
+          <div style="margin-bottom:20px;">
+            <label style="display:block; font-weight:700; margin-bottom:8px; color:var(--text);">Your Name</label>
+            <input type="text" id="sender-name" name="name" required 
+              style="width:100%; padding:12px 16px; border:2px solid #f0e5e2; border-radius:10px; font-family:'Jost',sans-serif; font-size:16px; transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='var(--brand-2)'" 
+              onblur="this.style.borderColor='#f0e5e2'">
+          </div>
+          
+          <div style="margin-bottom:25px;">
+            <label style="display:block; font-weight:700; margin-bottom:8px; color:var(--text);">Your Message</label>
+            <textarea id="sender-message" name="message" required rows="5"
+              style="width:100%; padding:12px 16px; border:2px solid #f0e5e2; border-radius:10px; font-family:'Jost',sans-serif; font-size:16px; resize:vertical; transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='var(--brand-2)'" 
+              onblur="this.style.borderColor='#f0e5e2'"
+              placeholder="Write your birthday wishes here..."></textarea>
+          </div>
+          
+          <button type="submit" 
+            style="width:100%; padding:14px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#fff; border:none; border-radius:12px; font-weight:700; font-size:16px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.2s; font-family:'Jost',sans-serif;"
+            onmouseover="this.style.transform='translateY(-2px)'" 
+            onmouseout="this.style.transform='translateY(0)'">
+            Send Message 💌
+          </button>
+        </form>
+      </div>
+
+      <!-- Success Message (hidden initially) -->
+      <div id="success-message" style="display:none; text-align:center; padding:40px 30px; background:#fff; border-radius:var(--radius); border:2px solid var(--brand-2); box-shadow:var(--shadow);">
+        <div style="font-size:48px; margin-bottom:15px;">🎉</div>
+        <h3 style="font-size:24px; font-weight:800; color:var(--brand); margin-bottom:10px;">Message Sent Successfully!</h3>
+        <p style="color:var(--muted); font-size:16px; margin-bottom:20px;">Your birthday wishes have been delivered to Maria Rita. Thank you for making her day special!</p>
+        <p style="color:var(--text); font-weight:600;">Now complete your payment below to send your gift. 🎁</p>
+      </div>
+    </div>
+
     <div class="payment-grid">
       
       <!-- Venmo -->
@@ -300,6 +342,45 @@
         document.getElementById('item-info').innerHTML = 
           'You\'re about to purchase <strong>' + itemTitle + '</strong> for <strong>' + itemPrice + '</strong>.<br>Select your preferred payment method below.';
       }
+
+      // Lidar com o envio da mensagem
+      const messageForm = document.getElementById('message-form');
+      messageForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('sender-name').value;
+        const message = document.getElementById('sender-message').value;
+        const item = itemTitle || 'Not specified';
+        const price = itemPrice || 'Not specified';
+        
+        // Preparar dados para envio
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('message', message);
+        formData.append('item', item);
+        formData.append('price', price);
+        formData.append('_subject', 'New Birthday Message for Maria Rita! 🎂');
+        formData.append('_template', 'table');
+        
+        // Enviar para FormSubmit
+        fetch('https://formsubmit.co/ajax/mariarita@gmail.com', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Esconder formulário e mostrar mensagem de sucesso
+          document.getElementById('message-form-container').style.display = 'none';
+          document.getElementById('success-message').style.display = 'block';
+          
+          // Scroll suave para a mensagem de sucesso
+          document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch(error => {
+          alert('Oops! Something went wrong. Please try again or contact us directly.');
+          console.error('Error:', error);
+        });
+      });
     });
   </script>
 
